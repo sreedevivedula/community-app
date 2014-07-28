@@ -43,7 +43,7 @@ module.exports = function(grunt) {
             port:  9000,
             hostname: 'localhost',
             livereload: 35729,
-            open:'http://<%= connect.options.hostname %>:<%= connect.options.port %>?baseApiUrl=https://demo.openmf.org'
+            open:'http://<%= connect.options.hostname %>:<%= connect.options.port %>?baseApiUrl=https://localhost:8443'
         },
         livereload: {
             options: {
@@ -76,12 +76,6 @@ module.exports = function(grunt) {
         force: true
       },
       all: ['Gruntfile.js', '<%= mifosx.app %>/scripts/**/*.js']
-    },
-
-    karma: {
-      unit: {
-          configFile: 'karma.conf.js'
-      }
     },
 
     //uglify the js files
@@ -333,6 +327,5 @@ module.exports = function(grunt) {
   grunt.registerTask('default', ['clean', 'jshint', 'copy:dev']);
   grunt.registerTask('prod', ['clean', 'copy:prod', 'concat', 'uglify:prod', 'devcode:dist', 'hashres','replace']);
   grunt.registerTask('dev', ['clean', 'copy:dev']);
-  grunt.registerTask('test', ['karma']);
 
 };
