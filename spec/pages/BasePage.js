@@ -1,18 +1,18 @@
 var Config = require('../config/MifosxConfig'),
     webdriver = require('selenium-webdriver');
 
+
 var BasePage = function() {
 
-    var config = Config(),
-        driver = new webdriver.Builder().withCapabilities(webdriver.Capabilities.chrome()).build();
+    if ( arguments.callee._singletonInstance )
+        return arguments.callee._singletonInstance;
+    arguments.callee._singletonInstance = this;
 
-    var by = webdriver.By;
+    this.config = Config(),
+    this.driver = new webdriver.Builder().withCapabilities(webdriver.Capabilities.chrome()).build();
+    this.by = webdriver.By;
+    this.wd = webdriver;
 
-    return {
-        driver : driver,
-        by: by,
-        config: config
-    }
-};
+}
 
 module.exports = BasePage;

@@ -1,4 +1,5 @@
 var BasePage = require('./BasePage');
+var homepage = require('./HomePage');
 
 loginpage = new BasePage();
 
@@ -16,13 +17,15 @@ loginpage.login = function(username, password) {
     driver.findElement(by.id("uid")).sendKeys(username);
     driver.findElement(by.id("pwd")).sendKeys(password);
     driver.findElement(by.id("login-button")).click();
+    var flow = this.wd.promise.controlFlow();
+    console.log(flow.getSchedule());
 
+    homepage.waitForLoad();
+    return homepage;
 };
 
 loginpage.loginAsAdmin = function() {
-
     this.login(this.config.adminUsername, this.config.adminPassword);
-
 };
 
 module.exports = loginpage;
