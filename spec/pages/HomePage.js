@@ -1,17 +1,18 @@
-var BasePage = require('./BasePage');
+var Page = require('./BasePage');
+var homePageNavBar = require('./HomePageNavBar');
 
-homepage = new BasePage();
+homepage = Page.create({
 
-homepage.openCreateClientPage = function() {
-    this.driver.findElement({"id":"main-menu-left"}).findElement({"linkText": "Clients"}).click();
-}
+    navbar: homePageNavBar,
 
-homepage.waitForLoad = function() {
-    this.driver.wait(function() {
-        return this.driver.findElement(by.id("main-menu-left")).then(function(element) {
-            return element.isDisplayed();
-        });
-    }, 3000);
-}
+    getMifosXLogo: function() {
+        return this.driver.findElement(this.by.id("main"));
+    },
+
+    waitForLoad: function() {
+        this.waitForElement(this.by.id("main"));
+    }
+
+});
 
 module.exports = homepage;
