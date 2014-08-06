@@ -5,12 +5,13 @@ homepage = Page.create({
 
     navbar: homePageNavBar,
 
-    getMifosXLogo: function() {
-        return this.driver.findElement(this.by.id("main"));
-    },
-
     waitForLoad: function() {
         this.waitForElement(this.by.id("main"));
+    },
+
+    isDisplayed: function() {
+        // Join a couple of element promises and return
+        return this.driver.findElement(this.by.id("main")).isDisplayed();
     }
 
 });
