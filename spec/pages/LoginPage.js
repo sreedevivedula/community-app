@@ -1,31 +1,34 @@
-var BasePage = require('./BasePage');
-var homepage = require('./HomePage');
+var Page = require('./BasePage');
+    homepage = require('./HomePage'),
+    logindata = require('../data/LoginData');
 
-loginpage = new BasePage();
+loginpage = Page.create({
 
-loginpage.login = function(username, password) {
+    getInvalidLoginError: function() {
+        return this.driver.findElement(this.by.css("label.error"));
+    },
 
-    var driver = this.driver;
-    var by = this.by;
+    login: function(username, password) {
+        this.waitForLoad();
+        this.driver.findElement(this.by.id("uid")).sendKeys(username);
+        this.driver.findElement(this.by.id("pwd")).sendKeys(password);
+        this.driver.findElement(this.by.id("login-button")).click();
+    },
 
-    driver.get(this.config.baseURL);
-    driver.wait(function() {
-        return driver.findElement(by.id("uid")).then(function(element) {
-            return element.isDisplayed();
-        });
-    }, 3000);
-    driver.findElement(by.id("uid")).sendKeys(username);
-    driver.findElement(by.id("pwd")).sendKeys(password);
-    driver.findElement(by.id("login-button")).click();
-    var flow = this.wd.promise.controlFlow();
-    console.log(flow.getSchedule());
+    validLogin: function(username, password) {
+        this.login(username, password);
+        homepage.waitForLoad();
+    },
 
-    homepage.waitForLoad();
-    return homepage;
-};
+    invalidLogin: function(username, password) {
+        this.login(username, password);
+        this.waitForLoad();
+    },
 
-loginpage.loginAsAdmin = function() {
-    this.login(this.config.adminUsername, this.config.adminPassword);
-};
+    waitForLoad: function() {
+        this.waitForElement(this.by.id("uid"));
+    }
+
+});
 
 module.exports = loginpage;
