@@ -13,7 +13,7 @@ test.describe("MIFOSX Login Page", function() {
 
     test.it("Should login admin user", function() {
         loginpage.validLogin(logindata.adminUsername, logindata.adminPassword);
-        expect(homepage.getMifosXLogo().isDisplayed()).to.eventually.equal(true);
+        expect(homepage.isDisplayed()).to.eventually.equal(true);
     });
 
     test.it("Should throw an error when invalid credentials are provided", function() {
