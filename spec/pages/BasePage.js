@@ -1,4 +1,4 @@
-var Config = require('../config/MifosxConfig'),
+var config = require('../config/MifosxConfig'),
     webdriver = require('selenium-webdriver'),
     _ = require('../../app/bower_components/underscore');
 
@@ -8,9 +8,9 @@ var BasePage = function() {
         return arguments.callee._singletonInstance;
     arguments.callee._singletonInstance = this;
 
-    this.driver = new webdriver.Builder().withCapabilities(webdriver.Capabilities.chrome()).build();
+    this.driver = new webdriver.Builder().withCapabilities(webdriver.Capabilities.phantomjs()).build();
     this.by = webdriver.By;
-    this.config = Config();
+    this.config = config;
 };
 
 BasePage.prototype.create = function(page) {

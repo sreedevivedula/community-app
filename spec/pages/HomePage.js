@@ -10,6 +10,7 @@ homepage = Page.create({
     },
 
     isDisplayed: function() {
+        this.waitForLoad();
         // Join a couple of element promises and return
         return this.driver.findElement(this.by.id("main")).isDisplayed();
     }
