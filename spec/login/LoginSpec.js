@@ -12,12 +12,14 @@ test.describe("MIFOSX Login Page", function() {
     });
 
     test.it("Should login admin user", function() {
-        loginpage.validLogin(logindata.adminUsername, logindata.adminPassword);
+        loginpage.login(logindata.adminUsername, logindata.adminPassword);
         expect(homepage.isDisplayed()).to.eventually.equal(true);
     });
 
     test.it("Should throw an error when invalid credentials are provided", function() {
-        loginpage.invalidLogin(logindata.invalidUsername, logindata.invalidPassword);
+        loginpage.login(logindata.invalidUsername, logindata.invalidPassword);
+        //To Fix
+        loginpage.waitForLoad();
         expect(loginpage.getInvalidLoginError().isDisplayed()).to.eventually.equal(true);
     });
 
