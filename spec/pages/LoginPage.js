@@ -15,16 +15,6 @@ loginpage = Page.create({
         this.driver.findElement(this.by.id("login-button")).click();
     },
 
-    validLogin: function(username, password) {
-        this.login(username, password);
-        homepage.waitForLoad();
-    },
-
-    invalidLogin: function(username, password) {
-        this.login(username, password);
-        this.waitForLoad();
-    },
-
     waitForLoad: function() {
         this.waitForElement(this.by.id("uid"));
     }
