@@ -8,7 +8,7 @@ var BasePage = function() {
         return arguments.callee._singletonInstance;
     arguments.callee._singletonInstance = this;
 
-    this.driver = new webdriver.Builder().withCapabilities(webdriver.Capabilities.phantomjs()).build();
+    this.driver = new webdriver.Builder().withCapabilities(webdriver.Capabilities.chrome()).build();
     this.by = webdriver.By;
     this.config = config;
 };
