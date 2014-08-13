@@ -1,35 +1,43 @@
-var config = require('../config/MifosxConfig'),
-    webdriver = require('selenium-webdriver'),
-    _ = require('../../app/bower_components/underscore');
+/*jslint node: true */
 
+(function () {
+    'use strict';
 
-var BasePage = function() {
-    if ( arguments.callee._singletonInstance )
-        return arguments.callee._singletonInstance;
-    arguments.callee._singletonInstance = this;
+    var appConfig = require('../config/MifosxConfig'),
+        driverConfig = require('../config/DriverConfig'),
+        underscore = require('../../app/bower_components/underscore'),
+        BasePage = function () {
+            if (this.singleton) {
+                return this.singleton;
+            }
+            this.singleton = this;
 
-    this.driver = new webdriver.Builder().withCapabilities(webdriver.Capabilities.chrome()).build();
-    this.by = webdriver.By;
-    this.config = config;
-};
+            this.driver = driverConfig.driver;
+            this.by = driverConfig.by;
+            this.appConfig = appConfig;
+        };
 
-BasePage.prototype.create = function(page) {
-    return _.extend(page, this);
-};
+    BasePage.prototype.create = function (page) {
+        return underscore.extend(page, this);
+    };
 
-BasePage.prototype.openLoginPage = function(page) {
-    this.driver.get(this.config.baseURL);
-}
+    BasePage.prototype.openLoginPage = function () {
+        this.driver.get(this.appConfig.baseURL);
+    };
 
-BasePage.prototype.waitForElement = function(locator, timeout) {
-    var driver = this.driver;
-    var by = this.by;
+    BasePage.prototype.waitForElement = function (locator, timeout, timeout_msg) {
+        var driver = this.driver;
 
-    driver.wait(function() {
-        return driver.findElement(locator).then(function(element) {
-            return element.isDisplayed();
-        });
-    }, timeout || this.config.PAGE_LOAD_TIMEOUT);
-}
+        driver.wait(function () {
+            return driver.findElement(locator).then(function (element) {
+                return element.isDisplayed();
+            });
+        },  timeout || this.appConfig.PAGE_LOAD_TIMEOUT,
+            timeout_msg || "Could not find element with locator using " +
+            locator.using + " and value " + locator.value);
+    };
 
-module.exports = new BasePage();
+    module.exports = new BasePage();
+
+}());
+

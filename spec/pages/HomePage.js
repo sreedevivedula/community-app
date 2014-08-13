@@ -1,20 +1,23 @@
-var Page = require('./BasePage');
-var homePageNavBar = require('./HomePageNavBar');
+/*jshint node: true */
 
-homepage = Page.create({
+(function () {
+    'use strict';
 
-    navbar: homePageNavBar,
+    var Page = require('./BasePage'),
+        homePageNavBar = require('./HomePageNavBar'),
+        homepage = Page.create({
 
-    waitForLoad: function() {
-        this.waitForElement(this.by.id("main"));
-    },
+            navbar: homePageNavBar,
 
-    isDisplayed: function() {
-        this.waitForLoad();
-        // Join a couple of element promises and return
-        return this.driver.findElement(this.by.id("main")).isDisplayed();
-    }
+            waitForLoad: function () {
+                this.waitForElement(this.by.id("main"));
+            },
 
-});
+            isDisplayed: function () {
+                // Join a couple of element promises and return
+                return this.driver.findElement(this.by.id("main")).isDisplayed();
+            }
 
-module.exports = homepage;
+        });
+    module.exports = homepage;
+}());

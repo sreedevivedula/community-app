@@ -1,3 +1,5 @@
+/*jslint node: true*/
+
 var loginpage = require('../pages/LoginPage'),
     homepage = require('../pages/HomePage'),
     test = require("selenium-webdriver/testing"),
@@ -6,13 +8,15 @@ var loginpage = require('../pages/LoginPage'),
 
 
 test.describe("MIFOSX Login Page", function() {
+    'use strict';
 
-    beforeEach("Open Login Page", function() {
+    test.beforeEach("Open Login Page", function() {
         loginpage.openLoginPage();
     });
 
     test.it("Should login admin user", function() {
         loginpage.login(logindata.adminUsername, logindata.adminPassword);
+        homepage.waitForLoad();
         expect(homepage.isDisplayed()).to.eventually.equal(true);
     });
 
@@ -23,7 +27,11 @@ test.describe("MIFOSX Login Page", function() {
         expect(loginpage.getInvalidLoginError().isDisplayed()).to.eventually.equal(true);
     });
 
-    afterEach("Logout", function() {
-        homepage.navbar.logout();
-    })
+    test.afterEach("Logout", function() {
+        homepage.isDisplayed().then(function(result) {
+            if (result) {
+                homepage.navbar.logout() ;
+            }
+        });
+    });
 });

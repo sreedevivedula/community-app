@@ -1,24 +1,28 @@
-var Page = require('./BasePage');
-    homepage = require('./HomePage'),
-    logindata = require('../data/LoginData');
+/*jslint node: true */
 
-loginpage = Page.create({
+(function () {
+    'use strict';
 
-    getInvalidLoginError: function() {
-        return this.driver.findElement(this.by.css("label.error"));
-    },
+    var Page = require('./BasePage'),
+        loginpage = Page.create({
 
-    login: function(username, password) {
-        this.waitForLoad();
-        this.driver.findElement(this.by.id("uid")).sendKeys(username);
-        this.driver.findElement(this.by.id("pwd")).sendKeys(password);
-        this.driver.findElement(this.by.id("login-button")).click();
-    },
+            getInvalidLoginError: function () {
+                return this.driver.findElement(this.by.css("label.error"));
+            },
 
-    waitForLoad: function() {
-        this.waitForElement(this.by.id("uid"));
-    }
+            login: function (username, password) {
+                this.waitForLoad();
+                this.driver.findElement(this.by.id("uid")).sendKeys(username);
+                this.driver.findElement(this.by.id("pwd")).sendKeys(password);
+                this.driver.findElement(this.by.id("login-button")).click();
+            },
 
-});
+            waitForLoad: function () {
+                return this.waitForElement(this.by.id("uid"));
+            }
+        });
 
-module.exports = loginpage;
+    module.exports = loginpage;
+
+}());
+

@@ -1,27 +1,34 @@
-var Page = require('./BasePage');
+/*jslint node: true */
 
-homepagenavbar = Page.create({
+(function () {
+    'use strict';
 
-    getUserDropdown: function() {
-        var driver = this.driver,
-            by = this.by;
+    var Page = require('./BasePage'),
 
-        return {
-            getLogOut: function() {
-                return driver.findElement(by.id("logout"));
+        homepagenavbar = Page.create({
+
+            getUserDropdown: function () {
+                var driver = this.driver,
+                    by = this.by;
+
+                return {
+                    getLogOut: function () {
+                        return driver.findElement(by.id("logout"));
+                    }
+                };
+            },
+
+            getUserDropDownLink: function () {
+                return this.driver.findElement(this.by.id("user-dropdown"));
+            },
+
+            logout: function () {
+                this.getUserDropDownLink().click();
+                this.getUserDropdown().getLogOut().click();
             }
-        }
-    },
 
-    getUserDropDownLink: function() {
-        return this.driver.findElement(this.by.id("user-dropdown"));
-    },
+        });
 
-    logout: function() {
-        this.getUserDropDownLink().click();
-        this.getUserDropdown().getLogOut().click();
-    }
+    module.exports = homepagenavbar;
+}());
 
-});
-
-module.exports = homepagenavbar;
