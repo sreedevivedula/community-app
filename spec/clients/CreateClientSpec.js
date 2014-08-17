@@ -19,7 +19,7 @@ test.describe("MIFOSX Clients Page", function() {
 
     test.it("Should create a client with valid information", function() {
         homepage.clientsContainer.createClient(clientdata);
-        var searchResults = homepage.clientsContainer.clientsList.search(clientdata.firstName);
+//        var searchResults = homepage.clientsContainer.clientsList.search(clientdata.firstName);
 
     });
 

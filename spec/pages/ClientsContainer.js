@@ -11,7 +11,6 @@
             },
 
             waitForLoad_: function() {
-                this.waitForElement()
             }
 
         });
