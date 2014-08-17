@@ -16,7 +16,6 @@ test.describe("MIFOSX Login Page", function() {
 
     test.it("Should login admin user", function() {
         loginpage.login(logindata.adminUsername, logindata.adminPassword);
-        homepage.waitForLoad();
         expect(homepage.isDisplayed()).to.eventually.equal(true);
     });
 
@@ -29,6 +28,7 @@ test.describe("MIFOSX Login Page", function() {
 
     test.afterEach("Logout", function() {
         homepage.isDisplayed().then(function(result) {
+            console.log("IS Displayed?" + result);
             if (result) {
                 homepage.navbar.logout() ;
             }

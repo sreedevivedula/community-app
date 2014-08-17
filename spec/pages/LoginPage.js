@@ -18,7 +18,7 @@
             },
 
             waitForLoad: function () {
-                return this.waitForElement(this.by.id("uid"));
+                this.waitForElement(this.by.id("uid"));
             }
         });
 

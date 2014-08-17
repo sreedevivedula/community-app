@@ -23,12 +23,13 @@
 
     BasePage.prototype.openLoginPage = function () {
         this.driver.get(this.appConfig.baseURL);
+        console.log(this.driver.window);
     };
 
     BasePage.prototype.waitForElement = function (locator, timeout, timeout_msg) {
         var driver = this.driver;
 
-        driver.wait(function () {
+        return driver.wait(function () {
             return driver.findElement(locator).then(function (element) {
                 return element.isDisplayed();
             });

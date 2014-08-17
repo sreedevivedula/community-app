@@ -18,6 +18,8 @@
         withCapabilities(webdriver.Capabilities.chrome()).
         build();
 
+    driver.manage().window().maximize();
+
     driverConfig = {
 
         driver: driver,
