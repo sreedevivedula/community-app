@@ -1,0 +1,31 @@
+/*jslint node: true*/
+
+var loginpage = require('../pages/LoginPage'),
+    homepage = require('../pages/HomePage'),
+    logindata = require('../data/LoginData');
+
+describe("MIFOSX Login Page", function() {
+    'use strict';
+
+    beforeEach(function() {
+        loginpage.go();
+    });
+
+    it("Should login admin user", function() {
+        loginpage.login(logindata.adminUsername, logindata.adminPassword);
+        expect(homepage.isDisplayed()).toEqual(true);
+    });
+
+    it("Should throw an error when invalid credentials are provided", function() {
+        loginpage.login(logindata.invalidUsername, logindata.invalidPassword);
+        expect(loginpage.invalidLoginError.isDisplayed()).toEqual(true);
+    });
+
+    afterEach(function() {
+        homepage.isDisplayed().then(function(result) {
+            if (result) {
+                homepage.navbar.getUserDropdown().logout() ;
+            }
+        });
+    });
+});

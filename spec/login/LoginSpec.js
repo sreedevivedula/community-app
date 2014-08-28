@@ -11,7 +11,7 @@ test.describe("MIFOSX Login Page", function() {
     'use strict';
 
     test.beforeEach("Open Login Page", function() {
-        loginpage.openLoginPage();
+        loginpage.go();
     });
 
     test.it("Should login admin user", function() {
@@ -23,14 +23,14 @@ test.describe("MIFOSX Login Page", function() {
         loginpage.login(logindata.invalidUsername, logindata.invalidPassword);
         //To Fix
         loginpage.waitForLoad();
-        expect(loginpage.getInvalidLoginError().isDisplayed()).to.eventually.equal(true);
+        expect(loginpage.invalidLoginError.get().isDisplayed()).to.eventually.equal(true);
     });
 
     test.afterEach("Logout", function() {
         homepage.isDisplayed().then(function(result) {
             console.log("IS Displayed?" + result);
             if (result) {
-                homepage.navbar.logout() ;
+                homepage.navbar.getUserDropdown().logout() ;
             }
         });
     });

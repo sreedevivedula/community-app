@@ -6,19 +6,23 @@
     var Page = require('./BasePage'),
         loginpage = Page.create({
 
-            getInvalidLoginError: function () {
-                return this.driver.findElement(this.by.css("label.error"));
+            go : function () {
+                driver.get(this.appConfig.baseURL);
+            },
+
+            invalidLoginError: {
+                get: function() { return driver.findElement(by.css("label.error")); }
             },
 
             login: function (username, password) {
                 this.waitForLoad();
-                this.driver.findElement(this.by.id("uid")).sendKeys(username);
-                this.driver.findElement(this.by.id("pwd")).sendKeys(password);
-                this.driver.findElement(this.by.id("login-button")).click();
+                driver.findElement(by.id("uid")).sendKeys(username);
+                driver.findElement(by.id("pwd")).sendKeys(password);
+                driver.findElement(by.id("login-button")).click();
             },
 
             waitForLoad: function () {
-                this.waitForElement(this.by.id("uid"));
+                this.waitForElement(by.id("uid"));
             }
         });
 

@@ -12,8 +12,8 @@
             }
             this.singleton = this;
 
-            this.driver = driverConfig.driver;
-            this.by = driverConfig.by;
+            global.driver = driverConfig.driver;
+            global.by = driverConfig.by;
             this.appConfig = appConfig;
         };
 
@@ -21,13 +21,7 @@
         return underscore.extend(page, this);
     };
 
-    BasePage.prototype.openLoginPage = function () {
-        this.driver.get(this.appConfig.baseURL);
-        console.log(this.driver.window);
-    };
-
     BasePage.prototype.waitForElement = function (locator, timeout, timeout_msg) {
-        var driver = this.driver;
 
         return driver.wait(function () {
             return driver.findElement(locator).then(function (element) {

@@ -9,17 +9,9 @@
 
             navbar: homePageNavBar,
 
-            waitForLoad: function () {
-                return this.waitForElement(by.id("main"));
-            },
-
             isDisplayed: function () {
-                var isDisplayed;
-                this.waitForLoad().then(null, function(error) {
-                    return false;
-                });
                 // Join a couple of element promises and return
-                return driver.findElement(by.id("main")).isDisplayed();
+                return element(by.id("main")).isDisplayed();
             }
 
         });
