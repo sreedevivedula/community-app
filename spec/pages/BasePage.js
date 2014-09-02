@@ -15,6 +15,8 @@
             }
             this.singleton = this;
 
+            driverConfig.driver.manage().timeouts().implicitlyWait(10000);
+
             global.driver = driverConfig.driver;
             global.by = driverConfig.by;
             this.appConfig = appConfig;

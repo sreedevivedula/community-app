@@ -16,7 +16,7 @@
 
             // Page Services
             go : function () {
-                driver.get(this.appConfig.baseURL);
+                return driver.get(this.appConfig.baseURL);
             },
 
             waitForLoad: function () {
