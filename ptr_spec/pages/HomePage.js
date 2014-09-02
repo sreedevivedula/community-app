@@ -1,4 +1,7 @@
 /*jshint node: true */
+/*global element: false */
+/*global by: false */
+
 
 (function () {
     'use strict';
@@ -10,7 +13,6 @@
             navbar: homePageNavBar,
 
             isDisplayed: function () {
-                // Join a couple of element promises and return
                 return element(by.id("main")).isDisplayed();
             }
 

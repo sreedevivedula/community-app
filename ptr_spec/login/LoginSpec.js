@@ -1,4 +1,7 @@
 /*jslint node: true*/
+/*global describe: false, it: false, afterEach: false, beforeEach: false*/
+/*global expect: false*/
+
 
 var loginpage = require('../pages/LoginPage'),
     homepage = require('../pages/HomePage'),
@@ -24,7 +27,7 @@ describe("MIFOSX Login Page", function() {
     afterEach(function() {
         homepage.isDisplayed().then(function(result) {
             if (result) {
-                homepage.navbar.getUserDropdown().logout() ;
+                homepage.navbar.userdropdown.logout() ;
             }
         });
     });

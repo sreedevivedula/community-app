@@ -1,4 +1,6 @@
-/*jshint node: true */
+/*jslint node: true */
+/*global driver: false */
+/*global by: false */
 
 (function () {
     'use strict';
@@ -7,18 +9,18 @@
         homePageNavBar = require('./HomePageNavBar'),
         homepage = Page.create({
 
+            // Page Elements
             navbar: homePageNavBar,
 
+            // Page Services
             waitForLoad: function () {
                 return this.waitForElement(by.id("main"));
             },
 
             isDisplayed: function () {
-                var isDisplayed;
                 this.waitForLoad().then(null, function(error) {
                     return false;
                 });
-                // Join a couple of element promises and return
                 return driver.findElement(by.id("main")).isDisplayed();
             }
 

@@ -1,4 +1,9 @@
 /*jslint node: true */
+/*global element: false */
+/*global by: false */
+/*global browser: false */
+
+
 
 (function () {
     'use strict';

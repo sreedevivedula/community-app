@@ -9,7 +9,8 @@
         driver,
         driverConfig;
 
-    server = new SeleniumServer("/Users/sreedevi/Downloads/selenium-server-standalone-2.42.2.jar",
+    server = new SeleniumServer("/Users/sreedevi/Downloads/" +
+            "selenium-server-standalone-2.42.2.jar",
         {port: 4444});
     server.start();
 

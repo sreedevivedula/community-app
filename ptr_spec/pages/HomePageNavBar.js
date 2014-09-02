@@ -1,4 +1,7 @@
 /*jslint node: true */
+/*global element: false */
+/*global by: false */
+
 
 (function () {
     'use strict';
@@ -7,9 +10,7 @@
 
         homepagenavbar = Page.create({
 
-            getUserDropdown: function () {
-
-                var homepagenavbar = this;
+            get userdropdown() {
 
                 return {
                     open: function() {

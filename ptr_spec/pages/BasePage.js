@@ -10,7 +10,6 @@
                 return this.singleton;
             }
             this.singleton = this;
-
             this.appConfig = appConfig;
         };
 

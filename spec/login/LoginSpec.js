@@ -19,18 +19,17 @@ test.describe("MIFOSX Login Page", function() {
         expect(homepage.isDisplayed()).to.eventually.equal(true);
     });
 
-    test.it("Should throw an error when invalid credentials are provided", function() {
+    test.it("Should throw an error with invalid credentials", function() {
         loginpage.login(logindata.invalidUsername, logindata.invalidPassword);
-        //To Fix
         loginpage.waitForLoad();
-        expect(loginpage.invalidLoginError.get().isDisplayed()).to.eventually.equal(true);
+        expect(loginpage.invalidLoginError.isDisplayed()).to.
+            eventually.equal(true);
     });
 
     test.afterEach("Logout", function() {
         homepage.isDisplayed().then(function(result) {
-            console.log("IS Displayed?" + result);
             if (result) {
-                homepage.navbar.getUserDropdown().logout() ;
+                homepage.navbar.userdropdown.logout() ;
             }
         });
     });

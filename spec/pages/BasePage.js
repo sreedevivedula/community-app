@@ -1,4 +1,7 @@
 /*jslint node: true */
+/*global driver: false */
+/*global by: false */
+
 
 (function () {
     'use strict';
@@ -21,7 +24,8 @@
         return underscore.extend(page, this);
     };
 
-    BasePage.prototype.waitForElement = function (locator, timeout, timeout_msg) {
+    BasePage.prototype.waitForElement = function (locator, timeout,
+                                                  timeout_msg) {
 
         return driver.wait(function () {
             return driver.findElement(locator).then(function (element) {
